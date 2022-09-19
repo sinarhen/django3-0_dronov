@@ -8,3 +8,5 @@ def index(request):
         'bbs': bbs
     }
     return render(request, template_name="index.html", context=context)
+
+

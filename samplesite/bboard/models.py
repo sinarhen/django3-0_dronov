@@ -21,8 +21,10 @@ class Bb(models.Model):
 class Rubric(models.Model):
     name = models.CharField(max_length=20, db_index=True, verbose_name='Name')
 
+    def __str__(self):
+        return self.name
+
     class Meta:
         verbose_name = 'Rubric'
         verbose_name_plural = 'Rubrics'
         ordering = ['name']
-        
