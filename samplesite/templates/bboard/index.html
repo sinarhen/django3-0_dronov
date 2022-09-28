@@ -6,7 +6,7 @@
         {% for bb in bbs %}
             <div>
                 <h3> {{bb.title}}, Rubric: {{bb.rubric.name}} </h3>
-                <p>{{bb.content}}</p>
+                <p>{{bb.content|truncatechars:50}}</p>
                 <p>{{bb.published|date:"d.m.Y H:i:s"}}</p>
             </div>
         {% endfor %}
