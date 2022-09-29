@@ -27,6 +27,7 @@ class Bb(models.Model):
     rubric = models.ForeignKey('Rubric', null=True, on_delete=models.PROTECT, verbose_name='Rubric')
     kind = models.CharField(verbose_name='Kind', choices=KINDS, default='s', max_length=4)
 
+    """Validation on field level"""
     def clean(self):
         errors = {}
         if self.content and len(self.content) < 40:
