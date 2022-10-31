@@ -125,3 +125,10 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+""" LOG IN/OUT DJANGO SUBSYSTEM
+LOGIN_URL - On this page redirecting when other page is closed for unauthorized persons 
+LOGIN_REDIRECT_URL - On this page redirecting after login
+LOGOUT_REDIRECT_URL - On this page redirecting after logout
+PASSWORD_RESET_TIMEOUT_DAYS - Number of days which e-mail with reset password option is active
+
+"""

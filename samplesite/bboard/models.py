@@ -2,15 +2,21 @@ from django.db import models
 from .validators import *
 
 
+class Spare(models.Model):
+    name = models.CharField(max_length=55, null=False, blank=False)
+
+
 class Machine(models.Model):
     name = models.CharField(max_length=55, null=False, blank=False)
-    detail = models.ManyToManyField('Detail')
+    spares = models.ManyToManyField(Spare,
+                                    through='Kit',
+                                    through_fields=('machine', 'spare'))
 
 
-class Detail(models.Model):
-    name = models.CharField(max_length=55, null=False, blank=False)
-
-# Create your models here.
+class Kit(models.Model):
+    machine = models.ForeignKey(Machine, on_delete=models.CASCADE)
+    spare = models.ForeignKey(Spare, on_delete=models.CASCADE)
+    count = models.IntegerField()
 
 
 class Bb(models.Model):
@@ -28,6 +34,7 @@ class Bb(models.Model):
     kind = models.CharField(verbose_name='Kind', choices=KINDS, default='s', max_length=4)
 
     """Validation on field level"""
+
     def clean(self):
         errors = {}
         if self.content and len(self.content) < 40:
