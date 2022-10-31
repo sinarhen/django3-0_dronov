@@ -2,23 +2,6 @@ from django.db import models
 from .validators import *
 
 
-class Spare(models.Model):
-    name = models.CharField(max_length=55, null=False, blank=False)
-
-
-class Machine(models.Model):
-    name = models.CharField(max_length=55, null=False, blank=False)
-    spares = models.ManyToManyField(Spare,
-                                    through='Kit',
-                                    through_fields=('machine', 'spare'))
-
-
-class Kit(models.Model):
-    machine = models.ForeignKey(Machine, on_delete=models.CASCADE)
-    spare = models.ForeignKey(Spare, on_delete=models.CASCADE)
-    count = models.IntegerField()
-
-
 class Bb(models.Model):
     KINDS = ({
                  None: 'What are we doing?',
