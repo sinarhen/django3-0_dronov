@@ -1,1 +1,4 @@
-/samplesite/testapp/tests.py
+__init__.py
+bboard/__pycache__/
+db.sqlite3
+samplesite/__pycache__/
