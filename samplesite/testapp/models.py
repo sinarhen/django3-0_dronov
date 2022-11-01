@@ -5,12 +5,14 @@ from django.db import models
 
 
 class Message(models.Model):
-    content = models.TextField()
+    ...
+
+    class Meta:
+        abstract = True
 
 
 class PrivateMessage(Message):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    message = models.OneToOneField(Message, on_delete=models.CASCADE, parent_link=True)
+    ...
 
 
 class Spare(models.Model):
