@@ -14,7 +14,8 @@ class Message(models.Model):
 class PrivateMessage(Message):
     ...
 
-
+    class Meta(Message.Meta):
+        pass
 class Spare(models.Model):
     name = models.CharField(max_length=55, null=False, blank=False)
 
