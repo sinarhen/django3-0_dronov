@@ -55,6 +55,11 @@ class Rubric(models.Model):
 
 
 class RevRubric(Rubric):
+    """
+    proxy = True allows use Rubric objects in database
+    (database inherits)
+    """
+
     class Meta:
-        proxy = True
         ordering = ['-name']
+        proxy = True
