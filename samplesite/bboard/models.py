@@ -2,6 +2,17 @@ from django.db import models
 from .validators import *
 
 
+class RubricManager(models.Manager):
+    """
+    Add some methods to specialized fetching data from database
+    """
+    def get_queryset(self):
+        return super(RubricManager, self).get_queryset().order_by('-name')
+
+    def order_by_bb_count(self):
+        return super(RubricManager, self).get_queryset().annotate(cnt=models.Count('bb')).order_by('cnt')
+
+
 class Bb(models.Model):
     KINDS = ({
                  None: 'What are we doing?',
@@ -44,6 +55,7 @@ class Bb(models.Model):
 
 class Rubric(models.Model):
     name = models.CharField(max_length=20, db_index=True, verbose_name='Name')
+    objects = RubricManager()
 
     def __str__(self):
         return self.name
