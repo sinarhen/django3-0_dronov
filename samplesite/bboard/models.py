@@ -52,3 +52,9 @@ class Rubric(models.Model):
         verbose_name = 'Rubric'
         verbose_name_plural = 'Rubrics'
         ordering = ['name']
+
+
+class RevRubric(Rubric):
+    class Meta:
+        proxy = True
+        ordering = ['-name']
