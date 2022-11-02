@@ -6,11 +6,19 @@ class RubricManager(models.Manager):
     """
     Add some methods to specialized fetching data from database
     """
+
     def get_queryset(self):
         return super(RubricManager, self).get_queryset().order_by('-name')
 
     def order_by_bb_count(self):
         return super(RubricManager, self).get_queryset().annotate(cnt=models.Count('bb')).order_by('cnt')
+
+    def display_orders_count(self):
+        query = super(RubricManager, self).get_queryset().annotate(cnt=models.Count('bb'))
+        dct = {}
+        for r in query:
+            dct[r.name] = {'count': r.cnt, 'set': {r.bb_set.all()}}
+        return dct
 
 
 class Bb(models.Model):
@@ -55,7 +63,8 @@ class Bb(models.Model):
 
 class Rubric(models.Model):
     name = models.CharField(max_length=20, db_index=True, verbose_name='Name')
-    objects = RubricManager()
+    objects = models.Manager()
+    bbs = RubricManager()
 
     def __str__(self):
         return self.name
