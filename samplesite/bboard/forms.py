@@ -2,6 +2,13 @@ from django import forms
 from django.core.exceptions import ValidationError
 
 from .models import Bb
+from django import forms
+from bboard.models import Rubric
+
+
+class SearchForm(forms.Form):
+    keyword = forms.CharField(max_length=20, label="Some Text")
+    rubric = forms.ModelChoiceField(queryset=Rubric.objects.all(), label='Rubric')
 
 
 class BbForm(forms.ModelForm):

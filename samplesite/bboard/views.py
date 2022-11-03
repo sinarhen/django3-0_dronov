@@ -7,6 +7,20 @@ from django.contrib.auth.mixins import UserPassesTestMixin
 from django.contrib.auth import authenticate, login
 import django.contrib.auth.views as dcav
 from django.contrib.auth.forms import AuthenticationForm
+from .forms import SearchForm
+
+
+def search(request):
+    if request.method == 'POST':
+        sf = SearchForm(request.POST)
+        if sf.is_valid():
+            kw = sf.cleaned_data["keyword"]
+            rubric_id = sf.cleaned_data['rubric'].pk
+            bbs = Bb.objects.filter(title__icontains=kw, rubric=rubric_id)
+            return render(request, 'bboard/search.html', {'bbs': bbs})
+    else:
+        sf = SearchForm()
+    return render(request, 'bboard/search.html', {'form': sf})
 
 
 def index(request):
