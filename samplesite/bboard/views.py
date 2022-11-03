@@ -1,3 +1,5 @@
+from django.forms import formset_factory
+
 from .models import Bb, Rubric
 from django.shortcuts import render
 from .forms import BbForm
@@ -8,6 +10,24 @@ from django.contrib.auth import authenticate, login
 import django.contrib.auth.views as dcav
 from django.contrib.auth.forms import AuthenticationForm
 from .forms import SearchForm
+
+
+def formset_processing(request):
+    fs = formset_factory(SearchForm, extra=3, can_order=True, can_delete=True)
+    if request.method == 'POST':
+        formset = fs(request.POST)
+        if formset.is_valid():
+            for form in formset:
+                if form.cleaned_data and not form.cleaned_data['DELETE']:
+                    kw = form.cleaned_data['keyword']
+                    rubric_id = form.cleaned_data['rubric'].pk
+                    order = form.cleaned_data['ORDER']
+                    #  Do any actions with cleaned data
+            return render(request, 'bboard/process_result.html')
+    else:
+        formset = fs()
+    context = {'formsets': formset}
+    return render(request, 'bboard/formset.html', context)
 
 
 def search(request):
