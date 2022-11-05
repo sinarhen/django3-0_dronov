@@ -38,8 +38,14 @@ INSTALLED_APPS = [
     'bboard.apps.BboardConfig',
     'testapp.apps.TestappConfig',
     'captcha',  # pip install django-simple-captcha
+    'precise_bbcode',
+    'bootstrap4',
 ]
-
+BOOTSTRAP4 = {
+    'required_css_class': 'required',
+    'success_css_class': 'has-success',
+    'error_css_class': 'has-error',
+}
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

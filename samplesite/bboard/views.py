@@ -64,7 +64,7 @@ def rubric_id(request, rubric_id):
     return render(request, template_name="bboard/by_rubric.html", context=context)
 
 
-class BbCreateView(UserPassesTestMixin, CreateView):
+class BbCreateView(CreateView):
     template_name = 'bboard/create.html'
     form_class = BbForm
     success_url = reverse_lazy('index')
@@ -74,8 +74,9 @@ class BbCreateView(UserPassesTestMixin, CreateView):
         context['rubrics'] = Rubric.objects.all()
         return context
 
-    def test_func(self):
-        return self.request.user.is_staff
+    # BbCreateView(UserPassesTestMixin, )
+    # def test_func(self):
+    #     return self.request.user.is_staff
 
 
 # from django.contrib.auth.mixins import PermissionRequiredMixin
