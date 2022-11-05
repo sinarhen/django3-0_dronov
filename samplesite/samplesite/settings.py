@@ -15,7 +15,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
@@ -26,7 +25,6 @@ SECRET_KEY = 'django-insecure-2ctd0)0i&c_4^chln3g-i(1^^gdxa^)u=c9*18*bj90id03dp3
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -39,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bboard.apps.BboardConfig',
     'testapp.apps.TestappConfig',
+    'captcha',  # pip install django-simple-captcha
 ]
 
 MIDDLEWARE = [
@@ -71,7 +70,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'samplesite.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
@@ -82,7 +80,6 @@ DATABASES = {
         "ATOMIC_REQUEST": True,
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -102,7 +99,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
@@ -113,7 +109,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
@@ -132,5 +127,36 @@ LOGIN_URL - On this page redirecting when other page is closed for unauthorized 
 LOGIN_REDIRECT_URL - On this page redirecting after login
 LOGOUT_REDIRECT_URL - On this page redirecting after logout
 PASSWORD_RESET_TIMEOUT_DAYS - Number of days which e-mail with reset password option is active
+"""
+
+"""
+САРТСНА_CНALLENGE_FUNCT - полное имя функции, генерирующей текст для 
+    САРТСНА, в виде строки. Поддерживаемые функции перечислены в 
+    разд. 1 7.4.2, в описании параметра generator поля CaptchaField. По умолчанию: 
+    captcha.helpers.random_char_challenge; 
+Глава 1 7. Формы и наборы форм: расширенные инструменты ... 353 
+САРТСНА_LENGTH - дпина С АРТ СНА в символах текста. Принимается во внимание только при использовании классической САРТСНА. По умолчанию: 4; 
+САРТСНА_МАТН_CНALLENGE_OPERATOR - строка с символом, обозначающим оператор 
+    умножения. Принимается во внимание только при использовании математической САРТСНА. По умолчанию: "*". Пример указания крестика в качестве оператора умножения: 
+САРТСНА МАТН CНALLENGE OPERATOR = 'х'
+CAPTCНA_WORDS_DICTIONARY - полный путь к файлу со словарем, используемым 
+    в случае выбора словарной САРТСНА. Словарь должен представлять собой текстовый файл, в котором каждое слово находится на отдельной строке; 
+САРТСНА_DICTONARY_MIN_LENGTH - минимальная дпина слова, взятого из словаря, 
+    в символах. Применяется в случае выбора словарной САРТСНА. По умолчанию: о; 
+САРТСНА_DICTONARY_МАХ_ LENGTH - максимальная дпина слова, взятого из словаря, 
+    в символах. Применяется в случае выбора словарной САРТСНА. По умолчанию: 99; 
+САРТСНА_TIMEOUT- промежуток времени в минутах, в течение которого сгенерированная САРТСНА останется действительной. По умолчанию: 5; 
+САРТСНА_FONT_РАТН - полный путь к файлу шрифта, используемого дпя вывода 
+    текста. По умолчанию - путь  <папка , в которой установлен Python>\Lib\sitepackages \captcha\ fonts \Vera . ttf (шрифт Vera, хранящийся в файле по этому 
+    пути, является свободным дпя распространения).
+CAPTCНA_FONT_SIZE - кегль шрифта текста в пикселах. По умолчанию: 22; 
+САРТСНА_LETTER_ROТAТION - диапазон углов поворота букв в тексте САРТСНА 
+    в виде кортежа, элементы которого укажут предельные углы поворота в градусах. По умолчанию: (-35, 35) ; 
+САРТСНА_FOREGROUND_COLOR - цвет текста на изображении САРТСНА в любом 
+    формате, поддерживаемом CSS. По умолчанию: "#001100" (очень темный, практически черный цвет); 
+САРТСНА_BACKGROUND_COLOR - цвет фона изображения САРТСНА в любом формате, поддерживаемом CSS. По умолчанию: " # ffffff" (белый цвет); 
+CAPTCНA_IМAGE_SIZE - геометрические размеры изображения в виде кортежа, 
+    первым элементом которого должна быть ширина, вторым - высота. Размеры 
+    исчисляются в пикселах. Если указать None, то размер изображения будет устанавливаться самой библиотекой. По умолчанию - None. 
 
 """
