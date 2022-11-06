@@ -1,4 +1,5 @@
 {% extends 'bboard/basic.html' %}
+{% load filtersandtags %}
 {% block title %}Main{% endblock %}
 {% block content %}
     <div>
@@ -8,6 +9,7 @@
                 <h3> {{bb.title}}, Rubric: {{bb.rubric.name}} </h3>
                 <p>{{bb.content|truncatechars:50}}</p>
                 <p>{{bb.published|date:"d.m.Y H:i:s"}}</p>
+                <h6>{{ bb.price|currency }}</h6>
             </div>
         {% endfor %}
     </div>
