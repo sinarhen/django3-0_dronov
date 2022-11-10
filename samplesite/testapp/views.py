@@ -4,6 +4,12 @@ from django.db import transaction
 from django.contrib.auth.forms import UserCreationForm
 
 
+def index(request):
+    pass
+
+def add(request):
+    pass
+
 # Create your views here.
 
 
