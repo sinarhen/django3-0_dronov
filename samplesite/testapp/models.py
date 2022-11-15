@@ -11,23 +11,23 @@ def get_path(instance, filename):
 
 class Image(models.Model):
     name = models.CharField(max_length=50, verbose_name='Name')
-    image = models.FileField(upload_to=get_path, verbose_name='Image')
+    image = models.ImageField(upload_to='photos/', verbose_name='Image')
     desc = models.TextField(verbose_name='Description')
 
 
-class Message(models.Model):
-    ...
-
-    class Meta:
-        abstract = True
-
-
-class PrivateMessage(Message):
-    ...
-
-    class Meta(Message.Meta):
-        pass
-
+# class Message(models.Model):
+#     ...
+#
+#     class Meta:
+#         abstract = True
+#
+#
+# class PrivateMessage(Message):
+#     ...
+#
+#     class Meta(Message.Meta):
+#         pass
+#
 
 class Spare(models.Model):
     name = models.CharField(max_length=55, null=False, blank=False)
@@ -45,12 +45,10 @@ class Kit(models.Model):
     spare = models.ForeignKey(Spare, on_delete=models.CASCADE)
     count = models.IntegerField()
 
+#
+# class Note(models.Model):
+#     content = models.TextField()
+#     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+#     object_id = models.PositiveIntegerField()
+#     content_object = GenericForeignKey(ct_field='content_type', fk_field='object_id')
 
-class Note(models.Model):
-    content = models.TextField()
-    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    object_id = models.PositiveIntegerField()
-    content_object = GenericForeignKey(ct_field='content_type', fk_field='object_id')
-
-
-print(ContentType)
