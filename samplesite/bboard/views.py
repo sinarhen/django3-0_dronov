@@ -114,3 +114,11 @@ def my_view(request):
     else:
         # Return an 'invalid login' error message.
         ...
+
+
+# Cookies
+"""
+def view(request):
+  response = HttpResponse('blah')
+  response.set_cookie('cookie_name', 'cookie_value')
+"""

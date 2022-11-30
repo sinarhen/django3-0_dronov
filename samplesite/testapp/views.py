@@ -1,3 +1,5 @@
+import os.path
+
 from django.contrib import auth
 from django.forms import formset_factory
 from django.shortcuts import render, redirect
@@ -5,7 +7,40 @@ from django.db import transaction
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .forms import ImgUploadForm
 from django.contrib.auth.models import User
-from django.http import HttpResponse
+from django.http import FileResponse
+from samplesite.settings import BASE_DIR
+from datetime import datetime
+
+FILES_ROOT = os.path.join(BASE_DIR, 'files')
+
+
+def output(request):
+    imgs = []
+    for entry in os.scandir(FILES_ROOT):
+        imgs.append(os.path.basename(entry))
+    context = {'imgs': imgs}
+    return render(request, 'testapp/index.html', context)
+
+
+def get(request, filename):
+    fn = os.path.join(FILES_ROOT, filename)
+    return FileResponse(open(fn, 'rb'), content_type='application/octet-stream')
+
+
+def add(request):
+    if request.method == 'POST':
+        form = ImgUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            uploaded_file = request.FILES['image']
+            fn = f'{datetime.now().timestamp()}{os.path.splitext(uploaded_file)}'
+            fn = os.path.join(FILES_ROOT, fn)
+            with open(fn, 'wb+') as destination:
+                for chunk in uploaded_file.chunks():
+                    destination.write(chunk)
+            return redirect('testapp:index')
+    form = ImgUploadForm()
+    context = {'form': form}
+    return render(request, 'testapp/index.html')
 
 
 def index(request):
