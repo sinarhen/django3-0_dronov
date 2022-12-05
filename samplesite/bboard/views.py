@@ -122,3 +122,13 @@ def view(request):
   response = HttpResponse('blah')
   response.set_cookie('cookie_name', 'cookie_value')
 """
+
+# Sessions
+
+"""
+if 'counter' in request.session:
+    cnt = request.session['counter'] + 1
+else: cnt = 1
+
+request.session['counter'] = cnt
+"""
