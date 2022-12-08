@@ -16,4 +16,3 @@ class BbAdmin(admin.ModelAdmin):
     def title_and_price(self):
         ...
 
-    title_and_price.short
