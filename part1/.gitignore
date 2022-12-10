@@ -1,0 +1,5 @@
+__init__.py
+bboard/__pycache__/
+db.sqlite3
+samplesite/__pycache__/
+/samplesite/testapp/migrations/
