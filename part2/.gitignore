@@ -1,0 +1,6 @@
+/bboard/bboard/__init__.py
+/venv/
+/bboard/bboard/__pycache__/
+/bboard/bboard/migrations/
+/bboard/main/__init__.py
+/bboard/main/migrations/
